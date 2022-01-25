@@ -65,9 +65,9 @@ for input_struc in inputs:
     final_transformed = final_transform(initial_transformed)
     print(final_transformed)
     print_person(final_transformed)
-"""
 
-"""
+
+
 # Unit Testing with Pytest and Mocks
 
 import pytest
@@ -108,7 +108,8 @@ def test_initial_tfm(generate_initial_transform_parameters):
     expected_output = generate_initial_transform_parameters[1]
 
     assert main.initial_transform(test_input) == expected_output
-"""
+
+
 
 # Mocks
 
@@ -164,3 +165,14 @@ def test_initial_tfm(generate_initial_transform_parameters):
     expected_output = generate_initial_transform_parameters[1]
 
     assert main.initial_transform(test_input) == expected_output
+"""
+
+"""
+# Integration Testing (0% code)
+
+O teste de integração é um dos métodos de teste mais simples aqui, mas sem dúvida um dos mais importantes. Isso envolve realmente executar seu aplicativo de ponta a ponta com dados reais em um ambiente semelhante ao de produção.
+
+Se esta é sua máquina doméstica, um servidor de teste que duplica um servidor de produção, ou apenas alterando uma conexão com um banco de dados de teste de um de produção, isso permite que você saiba que suas alterações funcionarão quando implantadas.
+
+Como em todos os outros métodos, você está verificando se seu aplicativo gera as saídas esperadas com algumas entradas – exceto que desta vez você está usando módulos externos reais (diferente do teste de unidade, onde eles são simulados), talvez gravando em bancos de dados reais ou arquivos e, em aplicativos maiores, garantindo que seu código se integre bem ao sistema geral.
+"""
