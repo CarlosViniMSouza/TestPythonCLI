@@ -1,4 +1,4 @@
 git add -A
-git commit -m "Next Topic: “Lo-Fi” Debugging With Print | Restart tomorrow(25/01/2022)"
+git commit -m "Next Topic: Using a Debugger"
 git push -u origin master
 git status
