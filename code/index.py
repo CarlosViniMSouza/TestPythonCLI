@@ -67,6 +67,7 @@ for input_struc in inputs:
     print_person(final_transformed)
 """
 
+"""
 # Unit Testing with Pytest and Mocks
 
 import pytest
@@ -100,6 +101,62 @@ def generate_initial_transform_parameters(request):
         expected_output['parents'] = ['John Q. Public Sr.', 'Mary S. Public']
 
     return test_input, expected_output
+
+
+def test_initial_tfm(generate_initial_transform_parameters):
+    test_input = generate_initial_transform_parameters[0]
+    expected_output = generate_initial_transform_parameters[1]
+
+    assert main.initial_transform(test_input) == expected_output
+"""
+
+# Mocks
+
+import pytest
+import main as main
+
+
+def initial_transform(data):
+    for item in list(data):
+        if type(data[item]) is dict:
+            for key in data[item]:
+                data[key] = data[item][key]
+            data.pop(item)
+
+    outside_module.do_something()
+    outside_module.do_something()
+    return data
+
+
+@pytest.fixture(params=['nodict', 'dict'])
+def generate_initial_transform_parameters(request, mocker):
+    test_input = {
+        'name': 'John Q. Public',
+        'street': '213 Main St.',
+        'city': 'Anytown',
+        'state': 'FL',
+        'zip': 99999,
+    }
+
+    expected_output = {
+        'name': 'John Q. Public',
+        'street': '213 Main St.',
+        'city': 'Anytown',
+        'state': 'FL',
+        'zip': 99999,
+    }
+
+    if request.param == 'dict':
+        test_input['relastionships'] = {
+            'siblings': ['Michael R. Public', 'Suzy Q. Public'],
+            'parents': ['John Q. Public Sr.', 'Mary S. Public'],
+        }
+        expected_output['siblings'] = ['Michael R. Public', 'Suzy Q. Public']
+        expected_output['parents'] = ['John Q. Public Sr.', 'Mary S. Public']
+
+    return test_input, expected_output
+    mocker.patch.object(outside_module, 'do_something')
+    mocker.do_something.return_value(1)
 
 
 def test_initial_tfm(generate_initial_transform_parameters):
