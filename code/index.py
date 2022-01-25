@@ -1,3 +1,4 @@
+"""
 # “Lo-Fi” Debugging With Print (code from main.py -> changed)
 def initial_transform(data):
     for item in list(data):
@@ -64,3 +65,45 @@ for input_struc in inputs:
     final_transformed = final_transform(initial_transformed)
     print(final_transformed)
     print_person(final_transformed)
+"""
+
+# Unit Testing with Pytest and Mocks
+
+import pytest
+import main as main
+
+
+@pytest.fixture(params=['nodict', 'dict'])
+def generate_initial_transform_parameters(request):
+    test_input = {
+        'name': 'John Q. Public',
+        'street': '213 Main St.',
+        'city': 'Anytown',
+        'state': 'FL',
+        'zip': 99999,
+    }
+
+    expected_output = {
+        'name': 'John Q. Public',
+        'street': '213 Main St.',
+        'city': 'Anytown',
+        'state': 'FL',
+        'zip': 99999,
+    }
+
+    if request.param == 'dict':
+        test_input['relastionships'] = {
+            'siblings': ['Michael R. Public', 'Suzy Q. Public'],
+            'parents': ['John Q. Public Sr.', 'Mary S. Public'],
+        }
+        expected_output['siblings'] = ['Michael R. Public', 'Suzy Q. Public']
+        expected_output['parents'] = ['John Q. Public Sr.', 'Mary S. Public']
+
+    return test_input, expected_output
+
+
+def test_initial_tfm(generate_initial_transform_parameters):
+    test_input = generate_initial_transform_parameters[0]
+    expected_output = generate_initial_transform_parameters[1]
+
+    assert main.initial_transform(test_input) == expected_output
